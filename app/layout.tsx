@@ -1,5 +1,10 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Theme } from '@radix-ui/themes';
+
+import SideMenu from './components/layout/SideMenu';
+
+import '@radix-ui/themes/styles.css';
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,8 +20,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html className='dark' lang="en" style={{ colorScheme: 'dark', }}>
+      <body className={inter.className}>
+        <Theme appearance="dark">
+          <main className="flex min-h-screen p-24 gap-4">
+            <SideMenu />
+            <div className="w-2/3 bg-[#9e565b] rounded-lg p-6 shadow-lg">
+              {children}
+            </div>
+          </main>
+        </Theme>
+      </body>
     </html>
   )
 }
